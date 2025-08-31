@@ -1,0 +1,76 @@
+.App {
+  text-align: center;
+  
+
+}:root {
+  --bg-dark: #2b2e1f;  
+  --accent-green: #8BC34A; 
+  --text-light: #ffffff; 
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  font-family: "Inter", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3 {
+  color: var(--text-light);
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: var(--accent-green);
+  color: var(--bg-dark);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.4);
+  margin-bottom: 10px;
+}
+
+button:hover {
+  background-color: #76a93f; /* slightly darker green */
+  transform: translateY(-3px);
+}
+
+button:disabled {
+  background-color: #4b5238;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+a {
+  color: var(--accent-green);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.card {
+  background-color: #35382a;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: 0px 6px 15px rgba(0,0,0,0.5);
+}
+
+
+
+
