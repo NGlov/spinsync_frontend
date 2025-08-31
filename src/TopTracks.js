@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchTopTracks } from "./api";
+import './TopTracks.css';
 
 const TopTracks = () => {
   const [tracks, setTracks] = useState([]);
@@ -7,7 +7,13 @@ const TopTracks = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchTopTracks()
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/history/top-tracks`, {
+      credentials: "include",
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch top tracks");
+        return res.json();
+      })
       .then((data) => {
         setTracks(data.items || []);
         setLoading(false);
@@ -25,15 +31,15 @@ const TopTracks = () => {
   return (
     <div className="songs">
       <h2>Your Top Tracks</h2>
-      <ul style={{ listStyle: "none", padding: 0 }}>
+      <ul>
         {tracks.map((track) => (
-          <li key={track.id} style={{ display: "flex", alignItems: "center", gap: "15px", marginBottom: "15px" }}>
+          <li key={track.id} className="track-item">
             <img
               src={track.album.images[0]?.url}
               alt={track.album.name}
-              style={{ width: 64, height: 64, borderRadius: 6 }}
+              className="track-image"
             />
-            <div>
+            <div className="track-info">
               <strong>{track.name}</strong><br />
               {track.artists.map(a => a.name).join(", ")}<br />
               <em>{track.album.name}</em>

@@ -1,8 +1,13 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
   text-align: center;
-  
+}
 
-}:root {
+:root {
   --bg-dark: #2b2e1f;  
   --accent-green: #8BC34A; 
   --text-light: #ffffff; 
@@ -71,6 +76,44 @@ a:hover {
   box-shadow: 0px 6px 15px rgba(0,0,0,0.5);
 }
 
+.songs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
 
+.songs h2 {
+  margin-bottom: 20px;
+}
 
+.songs ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 700px;
+}
 
+.track-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  background-color: #35382a;
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+
+.track-image {
+  width: 64px;
+  height: 64px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.track-info {
+  text-align: left;
+  color: #ffffff;
+}
