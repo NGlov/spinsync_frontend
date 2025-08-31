@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 function Dashboard() {
   const [current, setCurrent] = useState(null);
   const [topTracks, setTopTracks] = useState([]);
@@ -11,9 +13,9 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const [currentRes, topRes, recentRes] = await Promise.all([
-          fetch("http://127.0.0.1:5000/player/current", { credentials: "include" }),
-          fetch("http://127.0.0.1:5000/history/top-tracks", { credentials: "include" }),
-          fetch("http://127.0.0.1:5000/history/recent-tracks", { credentials: "include" }),
+          fetch(`${BACKEND_URL}/player/current`, { credentials: "include" }),
+          fetch(`${BACKEND_URL}/history/top-tracks`, { credentials: "include" }),
+          fetch(`${BACKEND_URL}/history/recent-tracks`, { credentials: "include" }),
         ]);
 
         if (!currentRes.ok) throw new Error("Failed to fetch current track");

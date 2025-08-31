@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { createPlaylist } from "./api";
 
 const PlaylistMaker = () => {
   const [loading, setLoading] = useState(false);
@@ -11,29 +12,16 @@ const PlaylistMaker = () => {
     setPlaylistUrl(null);
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/playlist", {
-        method: "POST",
-        credentials: "include", 
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setPlaylistUrl(data.playlist_url);
-      } else {
-        setError(data.error || "Failed to create playlist");
-      }
+      const data = await createPlaylist();
+      setPlaylistUrl(data.playlist_url);
     } catch (err) {
-      setError("Something went wrong");
+      setError(err.message);
     } finally {
       setLoading(false);
     }
   };
 
-   return (
+  return (
     <div className="flex flex-col items-center justify-center p-6">
       <button
         onClick={handleCreatePlaylist}
@@ -46,12 +34,7 @@ const PlaylistMaker = () => {
       {playlistUrl && (
         <p className="mt-4">
           🎶 Playlist created!{" "}
-          <a
-            href={playlistUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 underline"
-          >
+          <a href={playlistUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
             Open on Spotify
           </a>
         </p>

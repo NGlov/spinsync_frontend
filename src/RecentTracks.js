@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
-import './RecentTracks.css'
-function RecentTracks() {
+import { fetchRecentTracks } from "./api";
+
+const RecentTracks = () => {
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/history/recent-tracks", {
-      credentials: "include",
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch recent tracks");
-        return res.json();
-      })
+    fetchRecentTracks()
       .then((data) => {
         setTracks(data || []);
         setLoading(false);
@@ -28,7 +23,7 @@ function RecentTracks() {
   if (tracks.length === 0) return <p>No recent tracks found.</p>;
 
   return (
-    <div class="songs">
+    <div className="songs">
       <h2>Recently Played Tracks</h2>
       <ul style={{ listStyle: "none", padding: 0 }}>
         {tracks.map((track, i) => (
@@ -48,6 +43,6 @@ function RecentTracks() {
       </ul>
     </div>
   );
-}
+};
 
 export default RecentTracks;

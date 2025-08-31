@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
-import './TopTracks.css';
+import { fetchTopTracks } from "./api";
+
 const TopTracks = () => {
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/history/top-tracks", {
-      credentials: "include",
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch top tracks");
-        return res.json();
-      })
+    fetchTopTracks()
       .then((data) => {
         setTracks(data.items || []);
         setLoading(false);
@@ -28,11 +23,11 @@ const TopTracks = () => {
   if (tracks.length === 0) return <p>No top tracks found.</p>;
 
   return (
-    <div class='songs'>
+    <div className="songs">
       <h2>Your Top Tracks</h2>
       <ul style={{ listStyle: "none", padding: 0 }}>
         {tracks.map((track) => (
-          <li key={track.id} style={{ display: "flex", alignItems: "center", marginBottom: "15px", gap: "15px" }}>
+          <li key={track.id} style={{ display: "flex", alignItems: "center", gap: "15px", marginBottom: "15px" }}>
             <img
               src={track.album.images[0]?.url}
               alt={track.album.name}
